@@ -1,0 +1,16 @@
+imports:
+    - { resource: parameters.yml }
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    App\Service\Config\YoutubeConfig:
+        arguments:
+            $apiKey: '%youtube_api_key%'
+            $baseUri: '%youtube_api_base%'

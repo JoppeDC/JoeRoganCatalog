@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+    nginx:
+        image: yappabe/nginx:1.9
+        volumes:
+            - ./:/var/www/app
+        depends_on:
+            - php
+        environment:
+            DNSDOCK_ALIAS: joe.docker.webfolks.be
+            DOCUMENT_ROOT: /var/www/app/public
+            INDEX_FILE: index.php
+            PHP_FPM_SOCKET: php:9000
+
+    mysql:
+        image: yappabe/mysql:5.7
+        environment:
+            DNSDOCK_ALIAS: mysql.joe.docker.webfolks.be
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: dev
+            MYSQL_DATABASE: JoeRoganCatalog
+
+    php:
+        image: yappabe/php:7.2
+        volumes:
+            - ./:/var/www/app
+            - vendor:/vendor
+            - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
+            - ~/.composer:/root/.composer
+            - /tmpfs
+        working_dir: /var/www/app
+        environment:
+            PHP_FPM_USER: root
+        depends_on:
+            - mysql
+
+volumes:
+    mysql-data:
+    vendor:

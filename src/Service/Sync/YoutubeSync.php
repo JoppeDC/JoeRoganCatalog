@@ -59,7 +59,12 @@ class YoutubeSync
 
         $video->setTitle($item->getSnippet()->getTitle());
         $video->setDescription($item->getSnippet()->getDescription());
-        $video->setVideoId($item->getSnippet()->getResourceId()->getVideoId());
+        $video->setVideoId($item->getDetails()->getVideoId());
+
+        //TODO: Check why the normal createFromFormat wont work with the format "Y-m-d\TH:i:s.v\Z"
+
+        $unixTime = strtotime($item->getDetails()->getPublishedAt());
+        $video->setPublishedAt(\DateTime::createFromFormat('U', $unixTime));
 
         $this->logger->info('Synced video {name}.', ['name' => $video->getTitle()]);
         $this->em->persist($video);

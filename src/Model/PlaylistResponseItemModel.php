@@ -22,6 +22,14 @@ class PlaylistResponseItemModel
      */
     private $youtubeId;
 
+    /**
+     * @var YoutubeVideoContentDetails
+     *
+     * @Serializer\Type("App\Model\YoutubeVideoContentDetails")
+     * @Serializer\SerializedName("contentDetails")
+     */
+    private $details;
+
     public function getSnippet(): ?YoutubeVideoResponseModel
     {
         return $this->snippet;
@@ -40,5 +48,15 @@ class PlaylistResponseItemModel
     public function setYoutubeId(?string $youtubeId): void
     {
         $this->youtubeId = $youtubeId;
+    }
+
+    public function getDetails(): ?YoutubeVideoContentDetails
+    {
+        return $this->details;
+    }
+
+    public function setDetails(?YoutubeVideoContentDetails $details): void
+    {
+        $this->details = $details;
     }
 }

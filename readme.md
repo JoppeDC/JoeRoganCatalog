@@ -22,7 +22,7 @@ If you have no experience in symfony(4), check out their docs to get started. I'
 
 - Setup your local enviroment (With the docker-compose or any other dev env)
 - Prepare your database (Use doctrine to generate the scheme/database. I'm  not including migrations since its not yet a project thats running in production enviroment)
-- You can now sync the videos using the youtube:sync-joe*` command.
+- You can now sync the videos using the 'youtube:sync-joe` command.
 
 
 

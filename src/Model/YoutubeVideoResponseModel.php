@@ -22,14 +22,6 @@ class YoutubeVideoResponseModel
      */
     private $description;
 
-    /**
-     * @var YoutubeVideoResourceId
-     *
-     * @Serializer\Type("App\Model\YoutubeVideoResourceId")
-     * @Serializer\SerializedName("resourceId")
-     */
-    private $resourceId;
-
     public function getTitle(): ?string
     {
         return $this->title;
@@ -48,15 +40,5 @@ class YoutubeVideoResponseModel
     public function setDescription(?string $description): void
     {
         $this->description = $description;
-    }
-
-    public function getResourceId(): ?YoutubeVideoResourceId
-    {
-        return $this->resourceId;
-    }
-
-    public function setResourceId(?YoutubeVideoResourceId $resourceId): void
-    {
-        $this->resourceId = $resourceId;
     }
 }

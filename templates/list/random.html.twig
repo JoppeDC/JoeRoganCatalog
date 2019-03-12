@@ -3,5 +3,11 @@
 {% block title %}The Joe Rogan Catalog!{% endblock %}
 
 {% block body %}
-{{ dump(video) }}
+  <a href="{{ 'https://youtu.be/' ~ video.videoId }}">If your browser does not redirect, click here.</a>
+{% endblock %}
+
+{% block javascripts %}
+  <script type="text/javascript">
+    window.location.replace("{{ 'https://youtu.be/' ~ video.videoId }}");
+  </script>
 {% endblock %}

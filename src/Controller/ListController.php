@@ -34,8 +34,10 @@ class ListController extends AbstractController
     public function random(): Response
     {
         //todo: implement random
+        $video = $this->videoRepository->getOneRandom();
 
         return $this->render('list/random.html.twig', [
+            'video' => $video,
         ]);
     }
 }

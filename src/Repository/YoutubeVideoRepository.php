@@ -18,4 +18,15 @@ class YoutubeVideoRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, YoutubeVideo::class);
     }
+
+    public function getOneRandom()
+    {
+        $qb = $this->createQueryBuilder('v');
+
+        $qb->select('v')
+            ->orderBy('RAND()')
+            ->setMaxResults(1);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

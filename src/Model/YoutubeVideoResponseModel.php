@@ -22,6 +22,14 @@ class YoutubeVideoResponseModel
      */
     private $description;
 
+    /**
+     * @var ThumbnailsResponseModel
+     *
+     * @Serializer\Type("App\Model\ThumbnailsResponseModel")
+     * @Serializer\SerializedName("thumbnails")
+     */
+    private $thumbnails;
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -40,5 +48,15 @@ class YoutubeVideoResponseModel
     public function setDescription(?string $description): void
     {
         $this->description = $description;
+    }
+
+    public function getThumbnails(): ?ThumbnailsResponseModel
+    {
+        return $this->thumbnails;
+    }
+
+    public function setThumbnails(?ThumbnailsResponseModel $thumbnails): void
+    {
+        $this->thumbnails = $thumbnails;
     }
 }

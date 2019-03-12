@@ -4,6 +4,7 @@ namespace App\Service\Sync;
 
 use App\Entity\YoutubeVideo;
 use App\Model\PlaylistResponseItemModel;
+use App\Model\ThumbnailResponseModel;
 use App\Provider\Youtube\VideosProvider;
 use App\Repository\YoutubeVideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -60,7 +61,9 @@ class YoutubeSync
         $video->setTitle($item->getSnippet()->getTitle());
         $video->setDescription($item->getSnippet()->getDescription());
         $video->setVideoId($item->getDetails()->getVideoId());
-
+        if ($item->getSnippet()->getThumbnails()->getHighestRes() instanceof ThumbnailResponseModel) {
+            $video->setThumbnail($item->getSnippet()->getThumbnails()->getHighestRes()->getUrl());
+        }
         //TODO: Check why the normal createFromFormat wont work with the format "Y-m-d\TH:i:s.v\Z"
 
         $unixTime = strtotime($item->getDetails()->getPublishedAt());

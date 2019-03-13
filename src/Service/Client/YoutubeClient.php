@@ -2,6 +2,7 @@
 
 namespace App\Service\Client;
 
+use App\Exception\PlaylistRequestException;
 use App\Service\Config\YoutubeConfig;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -48,7 +49,7 @@ class YoutubeClient
             $response = $this->client->request('GET', $action, ['query' => $params]);
         } catch (RequestException $e) {
             $this->logger->error('There was a problem getting the Youtube API Response.');
-            die();
+            throw new PlaylistRequestException('Unable to fetch videos from playlist');
         }
 
         $responseBody = (string) $response->getBody();
